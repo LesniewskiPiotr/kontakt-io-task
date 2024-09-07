@@ -18,7 +18,10 @@ public class GroupController {
 
     @GetMapping
     public List<GroupDTO> findAll() {
-        return groupService.findAll().stream().map(GroupDTO::fromEntity).toList();
+        return groupService.findAll()
+                .stream()
+                .map(GroupDTO::fromEntity)
+                .toList();
     }
 
     @PostMapping
@@ -29,7 +32,10 @@ public class GroupController {
 
     @GetMapping("/{id}/assets")
     public List<AssetDTO> findGroupAssets(@PathVariable Long id) {
-        return groupService.findGroupAssets(id).stream().map(AssetDTO::fromEntity).toList();
+        return groupService.findGroupAssets(id).
+                stream()
+                .map(AssetDTO::fromEntity)
+                .toList();
     }
 
     @PostMapping("/{groupId}/assets/{assetId}")
@@ -39,6 +45,7 @@ public class GroupController {
     }
 
     @DeleteMapping("/{groupId}/assets/{assetId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeAsset(@PathVariable Long groupId, @PathVariable Long assetId) {
         groupService.removeAsset(groupId, assetId);
     }

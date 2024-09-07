@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/assets")
+@RequiredArgsConstructor
 public class AssetController {
 
     private final AssetService assetService;
@@ -37,6 +37,7 @@ public class AssetController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {
         assetService.deleteById(id);
     }

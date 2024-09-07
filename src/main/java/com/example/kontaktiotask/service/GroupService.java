@@ -53,25 +53,25 @@ public class GroupService {
     }
 
     @Transactional
-    public Group addAsset(Long groupId, Long assetId) {
+    public void addAsset(Long groupId, Long assetId) {
         log.info("Adding asset with ID: {} to group with ID: {}", assetId, groupId);
         Group group = findByIdWithAssets(groupId);
         Asset asset = assetService.findByIdWithGroups(assetId);
 
         addAsset(group, asset);
         log.info("Asset added successfully to group");
-        return groupRepository.saveAndFlush(group);
+        groupRepository.saveAndFlush(group);
     }
 
     @Transactional
-    public Group removeAsset(Long groupId, Long assetId) {
+    public void removeAsset(Long groupId, Long assetId) {
         log.info("Removing asset with ID: {} from group with ID: {}", assetId, groupId);
         Group group = findByIdWithAssets(groupId);
         Asset asset = assetService.findByIdWithGroups(assetId);
 
         removeAsset(group, asset);
         log.info("Asset removed successfully from group");
-        return groupRepository.saveAndFlush(group);
+        groupRepository.saveAndFlush(group);
     }
 
     private Group findByIdWithAssets(Long id) {
