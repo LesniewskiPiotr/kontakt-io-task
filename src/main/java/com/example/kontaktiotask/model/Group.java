@@ -8,9 +8,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "groups")
 @EqualsAndHashCode(exclude = "assets")
