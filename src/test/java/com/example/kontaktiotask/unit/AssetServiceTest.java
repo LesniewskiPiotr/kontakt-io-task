@@ -50,7 +50,7 @@ class AssetServiceTest {
                 .build();
 
         createAssetCommand = new CreateAssetCommand("New Asset", "New Type", "New Description");
-        updateAssetCommand = new UpdateAssetCommand("Updated Asset", "Updated Type", "Updated Description");
+        updateAssetCommand = new UpdateAssetCommand("Updated Asset", "Updated Type", "Updated Description", 1);
     }
 
     @Test

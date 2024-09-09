@@ -73,6 +73,7 @@ public class AssetService {
                 .type(command.type())
                 .description(command.description())
                 .groups(asset.getGroups())
+                .version(command.version())
                 .build();
 
         log.info("Asset with ID: {} updated successfully", id);

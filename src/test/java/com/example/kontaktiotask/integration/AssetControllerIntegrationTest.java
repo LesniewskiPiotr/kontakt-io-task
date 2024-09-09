@@ -135,7 +135,7 @@ public class AssetControllerIntegrationTest extends BaseIntegrationTest {
     void shouldUpdateAssetSuccessfully() throws Exception {
         //given
         Asset savedAsset = assetRepository.saveAndFlush(asset1);
-        UpdateAssetCommand updateCommand = new UpdateAssetCommand("Updated Name", "Updated Type", "Updated Description");
+        UpdateAssetCommand updateCommand = new UpdateAssetCommand("Updated Name", "Updated Type", "Updated Description", savedAsset.getVersion());
         String jsonPayload = objectMapper.writeValueAsString(updateCommand);
 
         //when
@@ -147,12 +147,13 @@ public class AssetControllerIntegrationTest extends BaseIntegrationTest {
         //then
         Asset updatedAsset = assetRepository.findById(savedAsset.getId()).orElseThrow();
         assertEquals("Updated Name", updatedAsset.getName());
+        assertEquals(1, updatedAsset.getVersion());
     }
 
     @Test
     void shouldReturn404WhenUpdatingNonExistingAsset() throws Exception {
         //given
-        UpdateAssetCommand updateCommand = new UpdateAssetCommand("Updated Name", "Updated Type", "Updated Description");
+        UpdateAssetCommand updateCommand = new UpdateAssetCommand("Updated Name", "Updated Type", "Updated Description", 1);
         String jsonPayload = objectMapper.writeValueAsString(updateCommand);
 
         //when
