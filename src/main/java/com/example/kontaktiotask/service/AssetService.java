@@ -62,8 +62,10 @@ public class AssetService {
     }
 
     @Transactional
+    //here is example how to use pessimistic lock and optimistic lock - shouldn't use both but I wanted to show how to do it for both scenarios
     public Asset update(Long id, @NonNull UpdateAssetCommand command) {
         log.info("Updating asset with ID: {}", id);
+        //pess
         Asset asset = assetRepository.findByIdWithLock(id)
                 .orElseThrow(() -> new AssetServiceException(HttpStatus.NOT_FOUND, String.format("Asset with id %s not found", id)));
 
@@ -73,6 +75,7 @@ public class AssetService {
                 .type(command.type())
                 .description(command.description())
                 .groups(asset.getGroups())
+                //opt
                 .version(command.version())
                 .build();
 
